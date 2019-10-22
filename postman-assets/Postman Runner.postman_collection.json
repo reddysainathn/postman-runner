@@ -14,13 +14,16 @@
 						"id": "adf5271a-c043-41b0-a1bc-81970c660c9d",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"  pm.response.to.have.status(200);",
 							"});",
 							"pm.test(\"Check response value\", function () {",
 							"  var responseData = pm.response.json();",
 							"  var requestData = JSON.parse(pm.request.body);",
 							"  pm.expect(responseData.key).to.eql(requestData.key);",
-							"});"
+							"});",
+							"",
+							"tests[\"[INFO] Request: \" + JSON.stringify(request)] = true;",
+							"tests[\"[INFO] Response: \" + responseBody] = true;"
 						],
 						"type": "text/javascript"
 					}
