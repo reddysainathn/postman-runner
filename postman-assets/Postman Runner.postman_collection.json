@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "31f1bd29-a056-464d-9541-79dede4d035b",
+		"name": "Postman Runner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Runner",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "adf5271a-c043-41b0-a1bc-81970c660c9d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check response value\", function () {",
+							"  var responseData = pm.response.json();",
+							"  var requestData = JSON.parse(pm.request.body);",
+							"  pm.expect(responseData.key).to.eql(requestData.key);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{pass-word}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{user-name}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"key\": \"{{key}}\",\n  \"value\": \"{{value}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:10090/runner/{{id}}?name={{name}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10090",
+					"path": [
+						"runner",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{name}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
